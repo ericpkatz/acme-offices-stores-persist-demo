@@ -1,16 +1,6 @@
 var state = {
   idx: 0,
   days: [
-    {
-      office: offices[1],
-      store: stores[1]
-    },
-    {
-    },
-    {
-      office: offices[0],
-      store: stores[0]
-    }
   ]
 };
 
@@ -82,4 +72,10 @@ function init(){
   VisitPickers('#visitPickers', stateChangeHandlers.onAddOffice, stateChangeHandlers.onAddStore);
 }
 
-init();
+
+$.get('/api/days')
+  .then(function(days){
+    state.days = days;
+    init();
+  });
+  

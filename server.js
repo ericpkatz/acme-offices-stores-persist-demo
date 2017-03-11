@@ -22,7 +22,15 @@ app.get('/', (req, res, next)=> {
   ])
   .then( result => res.render('index', { offices: result[0], stores: result[1] }))
   .catch(next);
+});
 
+app.get('/api/days', (req, res, next)=>{
+  models.Day.findAll({
+    include: [ models.Office, models.Store ],
+    order: '\"createdAt\"'
+  })
+    .then( days => res.send(days))
+    .catch(next)
 });
 
 const port = process.env.PORT || 3000;
