@@ -1,0 +1,21 @@
+{
+  "name": "acme-offices-stores-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "DATABASE_URL=postgres://localhost/acme_offices_stores_demo nodemon --ignore public/ server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "express": "^4.14.1",
+    "jquery": "^3.1.1",
+    "pg": "^6.1.2",
+    "sequelize": "^3.30.2",
+    "swig": "^1.4.2"
+  }
+}
