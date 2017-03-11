@@ -24,13 +24,25 @@ app.get('/', (req, res, next)=> {
   .catch(next);
 });
 
+app.post('/api/days', (req, res, next)=> {
+  models.Day.create({})
+    .then( day => res.send(day))
+    .catch(next);
+});
+
+app.delete('/api/days/:id', (req, res, next)=> {
+  models.Day.destroy({ where: { id: req.params.id }})
+    .then( () => res.sendStatus(200))
+    .catch(next);
+});
+
 app.get('/api/days', (req, res, next)=>{
   models.Day.findAll({
     include: [ models.Office, models.Store ],
     order: '\"createdAt\"'
   })
     .then( days => res.send(days))
-    .catch(next)
+    .catch(next);
 });
 
 const port = process.env.PORT || 3000;

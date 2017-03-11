@@ -30,15 +30,25 @@ function onAddStore(store){
 }
 
 function onAddDay(){
-  state.days.push({});
-  state.idx = state.days.length - 1;
-  renderDayPicker();
+  $.post('/api/days')
+    .then(function(day){
+      state.days.push(day);
+      state.idx = state.days.length - 1;
+      renderDayPicker();
+    });
 }
 
 function onRemoveDay(){
-  state.days.splice(state.days.index, 1);
-  state.idx = 0;
-  renderDayPicker();
+  var day = state.days[state.idx];
+  $.ajax({
+    url: `/api/days/${day.id}`,
+    method: 'DELETE'
+  })
+  .then(function(){
+    state.days.splice(state.idx, 1);
+    state.idx = 0;
+    renderDayPicker();
+  });
 }
 
 var stateChangeHandlers = {
